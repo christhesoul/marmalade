@@ -16,9 +16,8 @@
     <h1>My Shop</h1>
     <?php
     $cart = new \Marmalade\Cart('cart');
-    $cart->add_item(12, 2);
-    $cart->add_item(12, 2);
-    $cart->remove_item(12, 1000);
+    $cart->add_item(13);
+    print_r($cart->get_item_ids());
     print_r($cart->items);
     ?>
   </div>

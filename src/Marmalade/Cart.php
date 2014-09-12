@@ -35,6 +35,18 @@ class Cart {
     return $this->items[$product_id];
   }
   
+  public function get_item_ids() {
+    return array_keys($this->items);
+  }
+  
+  public function total_price() {
+    $price = 0;
+    foreach($this->items as $product_id => $quantity){
+      $price += get_field('price', $product_id) * $quantity;
+    }
+    return $price;
+  }
+  
   private function increase_item_quantity($product_id, $quantity) {
     $_SESSION[$this->cart_name][$product_id] += $quantity;
     $this->sync_session();

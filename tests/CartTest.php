@@ -1,4 +1,8 @@
 <?php
+function get_field($name, $id) {
+  return 100;
+}
+
 class CartTest extends PHPUnit_Framework_TestCase
 {
   public function test_construct(){
@@ -45,6 +49,14 @@ class CartTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(2, $cart->quantity_of(12));
   }
   
-  
+  public function test_total_price(){
+    $cart = new \Marmalade\Cart('foo');
+    $cart->add_item(12, 2);
+    $cart->add_item(13, 4);
+    $this->assertEquals(600, $cart->total_price());
+    
+    $cart->remove_item(12);
+    $this->assertEquals(500, $cart->total_price());
+  }
   
 }

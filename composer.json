@@ -1,5 +1,6 @@
 {
   "name": "christhesoul/marmalade",
+  "type": "wordpress-plugin",
   "autoload": {
     "psr-0" : {
       "Marmalade" : "src/"
