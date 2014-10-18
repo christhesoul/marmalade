@@ -1,7 +1,6 @@
 <?php ini_set('display_errors', 1); ?>
 <?php session_start(); ?>
 <?php require_once('vendor/autoload.php'); ?>
-<?php require_once('src/autoload.php'); ?>
 
 <!DOCTYPE HTML>
 <html lang="en-US">
@@ -15,9 +14,8 @@
   <div class="container">
     <h1>My Shop</h1>
     <?php
-    $cart = new \Marmalade\Cart('cart');
+    $cart = new Marmalade\Cart('cart');
     $cart->add_item(13);
-    print_r($cart->get_item_ids());
     print_r($cart->items);
     ?>
   </div>
