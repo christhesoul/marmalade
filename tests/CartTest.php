@@ -1,7 +1,5 @@
 <?php
-function get_field($name, $id) {
-  return 100;
-}
+require_once 'helpers.php';
 
 class CartTest extends PHPUnit_Framework_TestCase
 {
@@ -52,11 +50,18 @@ class CartTest extends PHPUnit_Framework_TestCase
   public function test_total_price(){
     $cart = new \Marmalade\Cart('foo');
     $cart->add_item(12, 2);
-    $cart->add_item(13, 4);
+    $cart->add_item(14, 4);
     $this->assertEquals(600, $cart->total_price());
     
     $cart->remove_item(12);
     $this->assertEquals(500, $cart->total_price());
+  }
+  
+  public function test_total_count(){
+    $cart = new \Marmalade\Cart('foo');
+    $cart->add_item(12, 55);
+    $cart->add_item(14, 45);
+    $this->assertEquals(100, $cart->total_count());
   }
   
 }

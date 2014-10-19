@@ -22,7 +22,8 @@ add_action('init','register_session');
 function cpts_register() {
 
 	$cpts = array(
-    new Marmalade\CPT('products','Product','Products'),
+    new Marmalade\CPT('product','Product','Products'),
+    new Marmalade\CPT('order','Order','Orders')
   );
 
   foreach($cpts as $cpt){
@@ -58,7 +59,7 @@ if(function_exists("register_field_group"))
         array (
           'param' => 'post_type',
           'operator' => '==',
-          'value' => 'products',
+          'value' => 'product',
           'order_no' => 0,
           'group_no' => 0,
         ),
@@ -93,7 +94,7 @@ function marmalade_add_to_cart(){
     'status' => 'ok',
     'message' => get_post($product_id)->post_title . ' added to cart',
     'cart' => array(
-      'quantity' => 4,
+      'quantity' => $cart->total_count(),
       'price' => $cart->total_price()
     )
   ));

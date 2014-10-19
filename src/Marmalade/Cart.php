@@ -6,7 +6,7 @@ class Cart {
   public $items;
   public $cart_name;
   
-  function __construct($name) {
+  function __construct($name = 'cart') {
     $this->cart_name = $name;
     $this->retrieve_or_create_session();
   }
@@ -39,12 +39,18 @@ class Cart {
     return array_keys($this->items);
   }
   
+  public function total_count() {
+    return array_sum(array_map(function($item) { return $item->quantity; }, $this->items()));
+  }
+  
   public function total_price() {
-    $price = 0;
-    foreach($this->items as $product_id => $quantity){
-      $price += get_field('price', $product_id) * $quantity;
-    }
-    return $price;
+    return array_sum(array_map(function($item) { return $item->total_price(); }, $this->items()));
+  }
+  
+  public function items() {
+    $item_array = $this->items;
+    array_walk($item_array, function(&$quantity, $product_id) { $quantity = new CartItem($product_id, $quantity); });
+    return array_filter($item_array, function($item) { return $item->is_valid(); });
   }
   
   private function increase_item_quantity($product_id, $quantity) {

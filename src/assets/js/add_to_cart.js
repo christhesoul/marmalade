@@ -13,7 +13,7 @@ $('document').ready(function(){
         update_mini_cart(r.cart);
         that.addClass('btn-success').html(r.message);
       } else {
-        
+        that.addClass('btn-danger').html(r.message);
       }
     });
     return false;
