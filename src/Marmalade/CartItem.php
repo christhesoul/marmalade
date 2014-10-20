@@ -5,8 +5,8 @@ class CartItem {
   
   public $name;
   public $quantity;
+  public $product_id;
   
-  private $product_id;
   private $valid;
   
   function __construct($product_id, $quantity) {
