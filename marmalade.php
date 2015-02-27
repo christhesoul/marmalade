@@ -11,8 +11,6 @@ License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
 */
 
-require_once('vendor/autoload.php');
-
 define('MARMALADE_PATH', plugin_dir_path(__FILE__));
 
 require_once(MARMALADE_PATH . 'src/config/session.php');
