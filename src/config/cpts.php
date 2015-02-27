@@ -1,5 +1,5 @@
 <?php
-function cpts_register() {
+function marmalade_cpts_register() {
 
 	$cpts = array(
     new Marmalade\CPT('products','Product','Products'),
@@ -11,4 +11,4 @@ function cpts_register() {
   }
 }
 
-add_action('init', 'cpts_register');
+add_action('init', 'marmalade_cpts_register');
