@@ -18,6 +18,6 @@ function marmalade_add_to_cart(){
 }
 
 function marmalade_load_add_to_cart_js(){
-  wp_enqueue_script('marmalade_add_to_cart_js', plugins_url( '/src/assets/js/add_to_cart.js', __FILE__ ), array('jquery') );
+  wp_enqueue_script('marmalade_add_to_cart_js', plugins_url( '../../src/assets/js/add_to_cart.js', __FILE__ ), array('jquery') );
 }
 add_action('wp_enqueue_scripts', 'marmalade_load_add_to_cart_js');
