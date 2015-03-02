@@ -68,7 +68,7 @@ class Order {
   }
 
   private function line_items_readable() {
-    $readable_array = array_map(function($line_item) { return get_post($line_item['product_id'])->post_title . ' (' . $line_item['quantity'] . ')' }, $this->line_items);
+    $readable_array = array_map(function($line_item) { return get_post($line_item['product_id'])->post_title . ' (' . $line_item['quantity'] . ')'; }, $this->line_items);
     return implode(', ', $readable_array);
   }
 
