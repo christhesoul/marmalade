@@ -40,6 +40,7 @@ class Order {
     update_field('field_54f45f4fbbcf4', $this->line_items_readable(), $order_id);
     update_field('field_54458bcb82a28', base64_encode(json_encode($this->line_items)), $order_id);
     update_field('field_54458ff12376d', $this->total_price, $order_id);
+    session_destroy();
     wp_redirect(get_permalink($order_id));
     exit;
   }
