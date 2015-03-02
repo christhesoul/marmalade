@@ -7,6 +7,7 @@ class Order {
   public $reference;
   public $shipping_info;
   public $line_items;
+  public $line_readble;
   public $total_price;
 
   function __construct($post) {
@@ -36,6 +37,7 @@ class Order {
       )
     );
     update_field('field_54456fc3da99f', $this->shipping_info, $order_id);
+    update_field('field_54f45f4fbbcf4', $this->line_items_readable(), $order_id)
     update_field('field_54458bcb82a28', base64_encode(json_encode($this->line_items)), $order_id);
     update_field('field_54458ff12376d', $this->total_price, $order_id);
     wp_redirect(get_permalink($order_id));
@@ -63,6 +65,11 @@ class Order {
       );
     }
     return $line_items;
+  }
+
+  private function line_items_readable() {
+    $readable_array = array_map(function($line_item) { get_post($line_item['product_id'])->post_title . ' (' . $line_item['quantity'] . ')' }, $this->line_items);
+    return implode(', ', $readable_array);
   }
 
   private function get_total_price() {
