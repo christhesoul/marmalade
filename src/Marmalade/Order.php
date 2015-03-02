@@ -10,15 +10,15 @@ class Order {
   public $total_price;
 
   function __construct($post) {
-    if(!array_key_exists('stripeEmail', $post))) {
-      die('Something went wrong processing your payment. You have not been charged.');
-    } else {
+    if(array_key_exists('stripeEmail', $post)) {
       $this->email = $post['stripeEmail'];
       $this->shipping_info = $this->process_shipping_info($post);
       $this->reference = uniqid();
       $this->line_items = $this->process_line_items();
       $this->total_price = $this->get_total_price();
       $this->create();
+    } else {
+      die('Something went wrong processing your payment. You have not been charged.');
     }
   }
 
