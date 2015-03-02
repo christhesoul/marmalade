@@ -10,8 +10,8 @@ class Order {
   public $total_price;
 
   function __construct($post) {
-    if(!wp_verify_nonce($post['new_order_nonce'], 'create_order')) {
-      die('Something suspicious is happening.');
+    if(!array_key_exists('stripeEmail', $post))) {
+      die('Something went wrong processing your payment. You have not been charged.');
     } else {
       $this->email = $post['stripeEmail'];
       $this->shipping_info = $this->process_shipping_info($post);
