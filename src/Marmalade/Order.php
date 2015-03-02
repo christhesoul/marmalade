@@ -35,7 +35,7 @@ class Order {
         'post_status' => 'publish'
       )
     );
-    update_field('field_54456fc3da99f', base64_encode(json_encode($this->shipping_info)), $order_id);
+    update_field('field_54456fc3da99f', $this->shipping_info, $order_id);
     update_field('field_54458bcb82a28', base64_encode(json_encode($this->line_items)), $order_id);
     update_field('field_54458ff12376d', $this->total_price, $order_id);
     wp_redirect(get_permalink($order_id));
