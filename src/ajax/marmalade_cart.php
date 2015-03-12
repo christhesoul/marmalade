@@ -38,7 +38,7 @@ function marmalade_remove_from_cart(){
 add_action('wp_ajax_marmalade_add_shipping', 'marmalade_add_shipping');
 add_action('wp_ajax_nopriv_marmalade_add_shipping', 'marmalade_add_shipping');
 
-function marmalade_add_shippingt(){
+function marmalade_add_shipping(){
   $shipping_cost = intval($_POST['shipping_cost']);
   $cart = new Marmalade\Cart();
   $cart->add_shipping($shipping_cost);
