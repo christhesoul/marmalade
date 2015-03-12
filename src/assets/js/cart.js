@@ -1,5 +1,6 @@
-update_mini_cart = function(cart){
+update_carts = function(cart){
   $('.js-marmalade-mini-cart').html(cart.quantity + ' items, ' + cart.price);
+  $('.js-marmalade-cart').find('.marmalade-total-price span').html(parseFloat(cart.price).toFixed(2))
 }
 
 $('document').ready(function(){
@@ -11,7 +12,7 @@ $('document').ready(function(){
     jQuery.post(ajaxurl, data, function(response) {
       r = JSON.parse(response);
       if(r.status == 'ok'){
-        update_mini_cart(r.cart);
+        update_carts(r.cart);
         that.addClass('btn-success').html(r.message);
       } else {
         that.addClass('btn-danger').html(r.message);
@@ -27,7 +28,7 @@ $('document').ready(function(){
     jQuery.post(ajaxurl, data, function(response) {
       r = JSON.parse(response);
       if(r.status == 'ok'){
-        update_mini_cart(r.cart);
+        update_carts(r.cart);
         $('.marmalade-remove-' + product_id).remove();
       } else {
         $('.marmalade-remove-' + product_id).remove();
