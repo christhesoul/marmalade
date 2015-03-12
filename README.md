@@ -62,7 +62,7 @@ and then add a `marmalade-remove-<?= $item->id(); ?>` class to your row, leaving
 
 ```HTML+PHP
 <? foreach($cart->items() as $item): ?>
-  <tr class="marmalade-remove-<?= $item->id(); ?>">
+  <tr class="marmalade-remove-<?= $item->product_id; ?>">
     <td><?= $item->name; ?></td>
     <td><?= Money::format($item->single_price()) ?></td>
     <td><?= $item->quantity ?></td>

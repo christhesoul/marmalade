@@ -28,9 +28,9 @@ $('document').ready(function(){
       r = JSON.parse(response);
       if(r.status == 'ok'){
         update_mini_cart(r.cart);
-        $('.marmalade-remove-' . $product_id).remove();
+        $('.marmalade-remove-' . product_id).remove();
       } else {
-        $('.marmalade-remove-' . $product_id).remove();
+        $('.marmalade-remove-' . product_id).remove();
       }
     });
     return false;
