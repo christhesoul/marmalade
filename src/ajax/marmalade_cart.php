@@ -35,6 +35,24 @@ function marmalade_remove_from_cart(){
   die();
 }
 
+add_action('wp_ajax_marmalade_add_shipping', 'marmalade_add_shipping');
+add_action('wp_ajax_nopriv_marmalade_add_shipping', 'marmalade_add_shipping');
+
+function marmalade_add_shippingt(){
+  $shipping_cost = intval($_POST['shipping_cost']);
+  $cart = new Marmalade\Cart();
+  $cart->add_shipping($shipping_cost);
+  echo json_encode(array(
+    'status' => 'ok',
+    'message' => 'Shipping cost added',
+    'cart' => array(
+      'quantity' => $cart->total_count(),
+      'price' => $cart->total_price()
+    )
+  ));
+  die();
+}
+
 function marmalade_load_cart_js(){
   wp_enqueue_script('marmalade_cart_js', plugins_url( '../../src/assets/js/cart.js', __FILE__ ), array('jquery'));
   wp_enqueue_script('marmalade_stripe_js', plugins_url( '../../src/assets/js/marmalade_stripe.js', __FILE__ ), array('jquery'));

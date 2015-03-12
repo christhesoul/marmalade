@@ -68,4 +68,24 @@ class CartTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(100, $cart->total_count());
   }
 
+  public function test_shipping(){
+    $cart = new \Marmalade\Cart('foo');
+    $cart->add_shipping(15);
+    $this->assertEquals(15, $cart->shipping());
+  }
+
+  public function test_decimal_shipping(){
+    $cart = new \Marmalade\Cart('foo');
+    $cart->add_shipping(15.1234);
+    $this->assertEquals(15.12, $cart->shipping());
+  }
+
+  public function test_shipping_amounts(){
+    $cart = new \Marmalade\Cart('foo');
+    $cart->add_shipping(15);
+    $cart->add_item(12, 2);
+    $cart->add_item(14, 4);
+    $this->assertEquals(615, $cart->total_price());
+    $this->assertEquals(61500, $cart->total_cents());
+  }
 }

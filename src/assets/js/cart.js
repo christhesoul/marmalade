@@ -36,4 +36,20 @@ $('document').ready(function(){
     });
     return false;
   });
+
+  $('body').on('click', '.marmalade-add-shipping', function(){
+    shipping_cost = parseFloat($(this).data('amount')).toFixed(2);
+    data = { 'action': 'marmalade_add_shipping', 'shipping_cost': shipping_cost };
+    var that = $(this);
+    jQuery.post(ajaxurl, data, function(response) {
+      r = JSON.parse(response);
+      if(r.status == 'ok'){
+        update_carts(r.cart);
+        that.addClass('current-shipping');
+      } else {
+        that.addClass('current-shipping');
+      }
+    });
+    return false;
+  });
 });

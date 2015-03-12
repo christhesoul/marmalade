@@ -15,14 +15,14 @@ class Cart {
     if(array_key_exists($product_id, $this->items)){
       $this->increase_item_quantity($product_id, $quantity);
     } else {
-      $_SESSION[$this->cart_name][$product_id] = $quantity;
+      $_SESSION[$this->cart_name]['items'][$product_id] = $quantity;
       $this->sync_session();
     }
   }
 
   public function remove_item($product_id) {
     if(array_key_exists($product_id, $this->items)){
-      unset($_SESSION[$this->cart_name][$product_id]);
+      unset($_SESSION[$this->cart_name]['items'][$product_id]);
       $this->sync_session();
     }
   }
@@ -40,7 +40,9 @@ class Cart {
   }
 
   public function total_price() {
-    return array_sum(array_map(function($item) { return $item->total_price(); }, $this->items()));
+    $items = array_sum(array_map(function($item) { return $item->total_price(); }, $this->items()));
+    $total = $items + $this->shipping();
+    return number_format($total, 2);
   }
 
   public function total_cents() {
@@ -53,13 +55,24 @@ class Cart {
     return array_filter($item_array, function($item) { return $item->is_valid(); });
   }
 
+  public function shipping() {
+    return $_SESSION[$this->cart_name]['shipping'];
+  }
+
+  public function add_shipping($amount){
+    $_SESSION[$this->cart_name]['shipping'] = number_format($amount, 2);
+    $this->sync_session();
+  }
+
+  // PRIVATE
+
   private function increase_item_quantity($product_id, $quantity) {
-    $_SESSION[$this->cart_name][$product_id] += $quantity;
+    $_SESSION[$this->cart_name]['items'][$product_id] += $quantity;
     $this->sync_session();
   }
 
   private function decrease_item_quantity($product_id, $quantity) {
-    $_SESSION[$this->cart_name][$product_id] -= $quantity;
+    $_SESSION[$this->cart_name]['items'][$product_id] -= $quantity;
     $this->sync_session();
   }
 
@@ -67,13 +80,15 @@ class Cart {
     if(isset($_SESSION[$this->cart_name])){
       $this->sync_session();
     } else {
-      $_SESSION[$this->cart_name] = array();
+      $_SESSION[$this->cart_name]['items'] = array();
+      $_SESSION[$this->cart_name]['shipping'] = 0;
       $this->sync_session();
     }
   }
 
   private function sync_session() {
-    $this->items = $_SESSION[$this->cart_name];
+    $this->items = $_SESSION[$this->cart_name]['items'];
+    $this->shipping = $_SESSION[$this->cart_name]['shipping'];
   }
 }
 
