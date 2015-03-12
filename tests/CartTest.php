@@ -32,10 +32,6 @@ class CartTest extends PHPUnit_Framework_TestCase
     $cart = new \Marmalade\Cart('foo');
     $cart->add_item(12, 2);
 
-    //Reduce it
-    $cart->remove_item(12);
-    $this->assertEquals(1, $cart->items[12]);
-
     //Remove it completely
     $cart->remove_item(12);
     $this->assertArrayNotHasKey(12, $cart->items);
@@ -54,7 +50,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(600, $cart->total_price());
 
     $cart->remove_item(12);
-    $this->assertEquals(500, $cart->total_price());
+    $this->assertEquals(400, $cart->total_price());
   }
 
   public function test_total_cents(){

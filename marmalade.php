@@ -20,4 +20,4 @@ require_once(MARMALADE_PATH . 'src/config/ajax.php');
 require_once(MARMALADE_PATH . 'src/acf/price.php');
 require_once(MARMALADE_PATH . 'src/acf/orders.php');
 
-require_once(MARMALADE_PATH . 'src/ajax/add_to_cart.php');
+require_once(MARMALADE_PATH . 'src/ajax/marmalade_cart.php');

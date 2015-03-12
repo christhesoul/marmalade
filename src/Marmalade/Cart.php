@@ -20,14 +20,10 @@ class Cart {
     }
   }
 
-  public function remove_item($product_id, $quantity = 1) {
+  public function remove_item($product_id) {
     if(array_key_exists($product_id, $this->items)){
-      if($this->quantity_of($product_id) > $quantity){
-        $this->decrease_item_quantity($product_id, $quantity);
-      } else {
-        unset($_SESSION[$this->cart_name][$product_id]);
-        $this->sync_session();
-      }
+      unset($_SESSION[$this->cart_name][$product_id]);
+      $this->sync_session();
     }
   }
 
