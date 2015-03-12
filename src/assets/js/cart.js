@@ -45,9 +45,10 @@ $('document').ready(function(){
       r = JSON.parse(response);
       if(r.status == 'ok'){
         update_carts(r.cart);
+        $('.marmalade-shipping-options a').removeClass('current-shipping');
         that.addClass('current-shipping');
       } else {
-        that.addClass('current-shipping');
+        alert('Something went wrong.')
       }
     });
     return false;
