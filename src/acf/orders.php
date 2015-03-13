@@ -52,6 +52,20 @@ if(function_exists("register_field_group"))
         'rows' => '',
         'formatting' => 'none',
       ),
+      array (
+        'key' => 'field_54458bcb82a29',
+        'label' => 'Shipping Cost',
+        'name' => 'shipping_cost',
+        'type' => 'number',
+        'required' => 0,
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'min' => '',
+        'max' => '',
+        'step' => '',
+      )
     ),
     'location' => array (
       array (

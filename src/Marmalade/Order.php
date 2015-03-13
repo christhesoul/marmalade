@@ -7,7 +7,7 @@ class Order {
   public $reference;
   public $shipping_info;
   public $line_items;
-  public $line_readble;
+  public $shipping_cost;
   public $total_price;
 
   function __construct($post) {
@@ -16,6 +16,7 @@ class Order {
       $this->shipping_info = $this->process_shipping_info($post);
       $this->reference = uniqid();
       $this->line_items = $this->process_line_items();
+      $this->shipping_cost = $this->get_shipping_cost();
       $this->total_price = $this->get_total_price();
       $this->create();
     } else {
@@ -40,6 +41,7 @@ class Order {
     update_field('field_54f45f4fbbcf4', $this->line_items_readable(), $order_id);
     update_field('field_54458bcb82a28', base64_encode(json_encode($this->line_items)), $order_id);
     update_field('field_54458ff12376d', $this->total_price, $order_id);
+    update_field('field_54458bcb82a29', $this->shipping_cost, $order_id);
     session_destroy();
     wp_redirect(get_permalink($order_id));
     exit;
@@ -71,6 +73,11 @@ class Order {
   private function line_items_readable() {
     $readable_array = array_map(function($line_item) { return get_post($line_item['product_id'])->post_title . ' (' . $line_item['quantity'] . ')'; }, $this->line_items);
     return implode(', ', $readable_array);
+  }
+
+  private function get_shipping_cost() {
+    $cart = new Cart();
+    return $cart->shipping();
   }
 
   private function get_total_price() {
