@@ -64,6 +64,12 @@ class Cart {
     $this->sync_session();
   }
 
+  public function add_default_shipping($amount){
+    if($this->shipping() == 0){
+      $this->add_shipping($amount);
+    }
+  }
+
   // PRIVATE
 
   private function increase_item_quantity($product_id, $quantity) {
